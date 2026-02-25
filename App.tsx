@@ -14,6 +14,7 @@ import {
   Pressable,
   Alert,
   ScrollView,
+  ImageBackground,
 } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import FastImage from 'react-native-fast-image';
@@ -25,43 +26,104 @@ function App() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.safeView}>
-        {/* ===== TODO: ScrollView ===== */}
-        <ScrollView>
-          {/* ===== TODO: MainView ===== */}
-          <View style={styles.imageContainer}>
-            {/* ===== TODO: Fast IMG ===== */}
-            <FastImage
-              style={styles.img}
-              source={{
-                uri: 'https://media1.tenor.com/m/ps67m_SI04UAAAAC/mike-tyson-awkward-smile.gif',
-                priority: FastImage.priority.normal,
-              }}
-              resizeMode={FastImage.resizeMode.contain}
-            />
-            {/* ===== TODO: Regular IMG ===== */}
-            <Image
-              style={styles.img}
-              source={require('./src/images/model.jpeg')}
-            />
-          </View>
+        {/* ====== Image Background ====== */}
+        <ImageBackground
+          blurRadius={1}
+          style={styles.backImg}
+          source={{
+            uri: 'https://images.unsplash.com/photo-1714894692194-2712d564b277?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          }}
+        >
+          {/* ===== ScrollView Main ===== */}
+          <ScrollView>
+            {/* ===== ScrollView IMG ===== */}
+            <ScrollView
+              horizontal
+              style={styles.imageContainer}
+              showsHorizontalScrollIndicator={false}
+            >
+              {/* ===== Fast IMG ===== */}
+              <FastImage
+                style={styles.img}
+                source={{
+                  uri: 'https://media1.tenor.com/m/ps67m_SI04UAAAAC/mike-tyson-awkward-smile.gif',
+                  priority: FastImage.priority.normal,
+                }}
+              />
+              {/* ===== Regular IMG ===== */}
+              <Image
+                style={styles.img}
+                source={require('./src/images/model.jpeg')}
+              />
+              {/* ===== Fast IMG ===== */}
+              <FastImage
+                style={styles.img}
+                source={{
+                  uri: 'https://media1.tenor.com/m/fL0JjU-mMLoAAAAC/kemanturawus.gif',
+                  priority: FastImage.priority.normal,
+                }}
+              />
+            </ScrollView>
 
-          <View style={styles.mainView}>
-            <Text style={styles.textColor}>Hola ! 🇲🇽</Text>
-          </View>
-          <View style={styles.secondView}>
-            <Text style={styles.textColor}>Namaste ! 🇮🇳</Text>
-          </View>
-          <View style={styles.thirdView}>
-            <Text style={styles.textColor}>Bonjour ! 🇫🇷</Text>
-          </View>
-          <View>
-            <TextInput style={styles.input} placeholder="Useless"></TextInput>
-          </View>
-          {/* ===== TODO: Pressable (Button) ===== */}
-          <Pressable style={styles.btnStyle} onPress={handleTap}>
-            <Text style={styles.btnText}> Press Me !</Text>
-          </Pressable>
-        </ScrollView>
+            <View style={styles.mainView}>
+              <Text style={styles.textColor}>🇨🇦 English – Hello </Text>
+            </View>
+            <View style={styles.secondView}>
+              <Text style={styles.textColor}>🇮🇳 Hindi – नमस्ते (Namaste)</Text>
+            </View>
+            <View style={styles.thirdView}>
+              <Text style={styles.textColor}>🇲🇽 Mexico (Spanish) – Hola</Text>
+            </View>
+            <View style={styles.mainView}>
+              <Text style={styles.textColor}> 🇫🇷 Frace - Bonjour ! </Text>
+            </View>
+            <View style={styles.secondView}>
+              <Text style={styles.textColor}> 🇩🇪 German – Hallo</Text>
+            </View>
+            <View style={styles.thirdView}>
+              <Text style={styles.textColor}> 🇮🇹 Italian – Ciao– Hallo</Text>
+            </View>
+            <View style={styles.mainView}>
+              <Text style={styles.textColor}>
+                🇯🇵 Japanese – こんにちは (Konnichiwa)
+              </Text>
+            </View>
+            <View style={styles.secondView}>
+              <Text style={styles.textColor}>
+                🇨🇳 Chinese (Mandarin) – 你好 (Nǐ hǎo)
+              </Text>
+            </View>
+            <View style={styles.thirdView}>
+              <Text style={styles.textColor}>🇷🇺 Russian – Привет (Privet)</Text>
+            </View>
+            <View style={styles.mainView}>
+              <Text style={styles.textColor}>🇧🇷 Portuguese – Olá</Text>
+            </View>
+            <View>
+              <TextInput
+                style={styles.input}
+                placeholder="Email"
+                placeholderTextColor="#999"
+              ></TextInput>
+            </View>
+
+            <View>
+              <TextInput
+                style={styles.input}
+                placeholder="Number"
+                placeholderTextColor="#999"
+              ></TextInput>
+            </View>
+            {/* ===== Pressable (Button) ===== */}
+            <Pressable style={styles.btnStyle} onPress={handleTap}>
+              <Text style={styles.btnText}> Submit</Text>
+            </Pressable>
+            {/* ===== Clear (Button) ===== */}
+            <Pressable style={styles.btnClear} onPress={handleTap}>
+              <Text style={styles.btnText}> Clear </Text>
+            </Pressable>
+          </ScrollView>
+        </ImageBackground>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -70,8 +132,18 @@ function App() {
 export default App;
 
 const styles = StyleSheet.create({
+  backImg: {
+    flex: 1,
+  },
   btnStyle: {
-    backgroundColor: '#25343F',
+    backgroundColor: '#008BFF',
+    padding: 12,
+    margin: 10,
+    borderRadius: 20,
+    alignItems: 'center',
+  },
+  btnClear: {
+    backgroundColor: '#C3110C',
     padding: 12,
     margin: 10,
     borderRadius: 20,
@@ -88,13 +160,12 @@ const styles = StyleSheet.create({
     padding: 1,
   },
   imageContainer: {
-    flexDirection: 'row', // Aligns children horizontally flexWrap: 'wrap',
-    justifyContent: 'center',
+    paddingHorizontal: 10, // Aligns children horizontally flexWrap: 'wrap',
   },
   img: {
-    flex: 1,
+    width: 200, // 🔥 REQUIRED
     height: 150,
-    padding: 2,
+    margin: 5,
     borderRadius: 25,
   },
   mainView: {
