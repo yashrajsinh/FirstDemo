@@ -4,47 +4,64 @@
  *
  * @format
  */
-import React from 'react';
-import { View, Text, StyleSheet, TextInput, Image } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Image,
+  Pressable,
+  Alert,
+  ScrollView,
+} from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import FastImage from 'react-native-fast-image';
 
 function App() {
+  function handleTap() {
+    Alert.alert('message');
+  }
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.safeView}>
-        <View style={styles.imageContainer}>
-          //Online image
-          <Image
-            style={styles.img}
-            source={{
-              uri: 'https://media1.tenor.com/m/ps67m_SI04UAAAAC/mike-tyson-awkward-smile.gif',
-            }}
-          />
-          <Image
-            style={styles.img}
-            source={{
-              uri: 'https://media1.tenor.com/m/RV0H8QvfzTIAAAAC/burgerkingguy.gif',
-            }}
-          />
-          //Local Image
-          <Image
-            style={styles.img}
-            source={require('./src/images/model.jpeg')}
-          />
-        </View>
+        {/* ===== TODO: ScrollView ===== */}
+        <ScrollView>
+          {/* ===== TODO: MainView ===== */}
+          <View style={styles.imageContainer}>
+            {/* ===== TODO: Fast IMG ===== */}
+            <FastImage
+              style={styles.img}
+              source={{
+                uri: 'https://media1.tenor.com/m/ps67m_SI04UAAAAC/mike-tyson-awkward-smile.gif',
+                priority: FastImage.priority.normal,
+              }}
+              resizeMode={FastImage.resizeMode.contain}
+            />
+            {/* ===== TODO: Regular IMG ===== */}
+            <Image
+              style={styles.img}
+              source={require('./src/images/model.jpeg')}
+            />
+          </View>
 
-        <View style={styles.mainView}>
-          <Text style={styles.textColor}>Hola ! 🇲🇽</Text>
-        </View>
-        <View style={styles.secondView}>
-          <Text style={styles.textColor}>Namaste ! 🇮🇳</Text>
-        </View>
-        <View style={styles.thirdView}>
-          <Text style={styles.textColor}>Bonjour ! 🇫🇷</Text>
-        </View>
-        <View>
-          <TextInput style={styles.input} placeholder="Useless"></TextInput>
-        </View>
+          <View style={styles.mainView}>
+            <Text style={styles.textColor}>Hola ! 🇲🇽</Text>
+          </View>
+          <View style={styles.secondView}>
+            <Text style={styles.textColor}>Namaste ! 🇮🇳</Text>
+          </View>
+          <View style={styles.thirdView}>
+            <Text style={styles.textColor}>Bonjour ! 🇫🇷</Text>
+          </View>
+          <View>
+            <TextInput style={styles.input} placeholder="Useless"></TextInput>
+          </View>
+          {/* ===== TODO: Pressable (Button) ===== */}
+          <Pressable style={styles.btnStyle} onPress={handleTap}>
+            <Text style={styles.btnText}> Press Me !</Text>
+          </Pressable>
+        </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -53,8 +70,20 @@ function App() {
 export default App;
 
 const styles = StyleSheet.create({
+  btnStyle: {
+    backgroundColor: '#25343F',
+    padding: 12,
+    margin: 10,
+    borderRadius: 20,
+    alignItems: 'center',
+  },
+  btnText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   safeView: {
-    backgroundColor: '#F075AE',
+    backgroundColor: '#FFF4EA',
     flex: 1,
     padding: 1,
   },
