@@ -18,11 +18,16 @@ import {
 } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import FastImage from 'react-native-fast-image';
+import List from './components/List';
 
 function App() {
-  function handleTap() {
-    Alert.alert('message');
+  const [name, setName] = useState('');
+
+  /* ========Function to handle Claer Click ======== */
+  function handleClear() {
+    setName('');
   }
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.safeView}>
@@ -68,12 +73,13 @@ function App() {
             <View style={styles.mainView}>
               <Text style={styles.textColor}>🇨🇦 English – Hello </Text>
             </View>
-            <View style={styles.secondView}>
-              <Text style={styles.textColor}>🇮🇳 Hindi – नमस्ते (Namaste)</Text>
-            </View>
             <View style={styles.thirdView}>
               <Text style={styles.textColor}>🇲🇽 Mexico (Spanish) – Hola</Text>
             </View>
+            <View style={styles.secondView}>
+              <Text style={styles.textColor}>🇮🇳 Hindi – नमस्ते (Namaste)</Text>
+            </View>
+
             <View style={styles.mainView}>
               <Text style={styles.textColor}> 🇫🇷 Frace - Bonjour ! </Text>
             </View>
@@ -104,6 +110,8 @@ function App() {
                 style={styles.input}
                 placeholder="Email"
                 placeholderTextColor="#999"
+                value={name}
+                onChangeText={setName}
               ></TextInput>
             </View>
 
@@ -115,13 +123,18 @@ function App() {
               ></TextInput>
             </View>
             {/* ===== Pressable (Button) ===== */}
-            <Pressable style={styles.btnStyle} onPress={handleTap}>
-              <Text style={styles.btnText}> Submit</Text>
+            <Pressable
+              style={styles.btnStyle}
+              onPress={() => setName('Babu Rao')}
+              disabled={!name}
+            >
+              <Text style={styles.btnText}>Submit</Text>
             </Pressable>
             {/* ===== Clear (Button) ===== */}
-            <Pressable style={styles.btnClear} onPress={handleTap}>
+            <Pressable style={styles.btnClear} onPress={handleClear}>
               <Text style={styles.btnText}> Clear </Text>
             </Pressable>
+            <List />
           </ScrollView>
         </ImageBackground>
       </SafeAreaView>
@@ -163,7 +176,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10, // Aligns children horizontally flexWrap: 'wrap',
   },
   img: {
-    width: 200, // 🔥 REQUIRED
+    width: 200, // REQUIRED
     height: 150,
     margin: 5,
     borderRadius: 25,
